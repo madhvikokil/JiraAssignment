@@ -1,11 +1,4 @@
 import React from 'react';
-// import BarChart from '@bit/recharts.recharts.bar-chart';
-// import Bar from '@bit/recharts.recharts.bar';
-// import XAxis from '@bit/recharts.recharts.x-axis';
-// import YAxis from '@bit/recharts.recharts.y-axis';
-// import CartesianGrid from '@bit/recharts.recharts.cartesian-griyd';
-// import Tooltip from '@bit/recharts.recharts.tooltip';
-// import Legend from '@bit/recharts.recharts.legend';
 import '../../Assets/recharts.css';
 import { BarChart, XAxis, YAxis, Bar,Legend } from 'recharts';
  class Chart2 extends React.Component{
@@ -21,28 +14,12 @@ import { BarChart, XAxis, YAxis, Bar,Legend } from 'recharts';
     }
 
 	componentDidMount(){
-            console.log("this.state.array : ",this.props.data);
-            
-            // const name ={
-            // 0:"open",
-            // 1:"acc",
-            // 2:"inprog",
-            // 3:"review",
-            // 4:"resolve",
-            // 5:"done",
-            // 6:"sp"     
-            // }
-            console.log("keys : ",Object.values(this.props.data));
-			let s = Object.keys(this.props.data);
-				
-				this.setState({array : s.map((key) => { return { value :this.props.data[key] }})});
-                console.log("new state : ",this.state.array);
-                
-               
-    }
+          
+		let s = Object.keys(this.props.data);
+			this.setState({array : s.map((key) => { return { value :this.props.data[key] }})});
+        }
 	
      render(){
-        console.log("this.state : ",this.state);
          return(
              
             <BarChart

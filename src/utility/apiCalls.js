@@ -1,8 +1,8 @@
 export default {
 
     callApi: (url) => {
-        let a = localStorage.getItem('token')
-        let headers = new Headers();
+        const a = localStorage.getItem('token')
+        const headers = new Headers();
         headers.append("Content-Type", "application/json");
         headers.append("Accept", "application/json");
         headers.append('Authorization', `Basic ${a}`);

@@ -15,7 +15,7 @@ const InputHere =(props) => {
             ></Form.Input></> )
 }
 
-let objectStorage ={
+const objectStorage ={
     inputhere : InputHere,
     
     

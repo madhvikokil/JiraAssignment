@@ -20,22 +20,12 @@ export default class Chart extends PureComponent {
     }
 
 	componentDidMount(){
-            console.log("this.state.array : ",this.props.data);
-            
-            console.log("keys : ",Object.values(this.props.data));
+         
 			let s = Object.keys(this.props.data);
 			for(let i=0;i<s.length-1;i++){
-				
-					this.setState({array : s.map((key) => { return { value :this.props.data[key] }})});
-					console.log("index : ",i," ",this.state.array);
-			
+				this.setState({array : s.map((key) => { return { value :this.props.data[key] }})});
 			}
-
-			console.log("new state : ",this.state.array);
-			
-			
-	
-    }
+		}
     
     renderCustomizedLabel = ({
 		cx, cy, midAngle, innerRadius, outerRadius, value
@@ -52,7 +42,7 @@ export default class Chart extends PureComponent {
 	};
 	
 	render() {
-		console.log('state.arr', this.state.array)
+		
 		return (
             <>
             <p>{this.props.count}</p>

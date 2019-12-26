@@ -11,29 +11,27 @@ class Projects extends React.Component{
     }
 
     onClickHandler = (id) => {
-        console.log("id clicked :",id);
         localStorage.setItem('project',id);
         this.props.history.push('/tablesheet/table1');
     }
 
     componentDidMount(){
         
-        let url = localStorage.getItem('url');
+        const url = localStorage.getItem('url');
         FetchApi.callApi(`${url}/rest/api/3/project`)
         .then(res =>{
                      
             for(let i=0;i<res.length;i++){
-                console.log(res[i].key);
                 this.setState({projects:[...this.state.projects,res[i].key]})
             }
             
         }).catch(error =>{
-            console.log(error);
+            alert(error);
         })
     }
 
     render(){
-        debugger;
+  
         let project;
         if(this.state.projects.length > 0){
             project =

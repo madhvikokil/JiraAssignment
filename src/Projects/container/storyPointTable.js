@@ -31,10 +31,10 @@ class Fetch2 extends React.Component{
     }
 
     data =() =>{
-      let project = localStorage.getItem('project');
+      const project = localStorage.getItem('project');
      return new Promise( (resolve, reject) => {
-      let url = localStorage.getItem('url');
-      let arrayOfUsers = [];
+      const url = localStorage.getItem('url');
+      const arrayOfUsers = [];
       
       FetchApi.callApi(`${url}/rest/api/2/user/assignable/search?project=${project}`).then(res => {
         for(let i=0;i<res.length;i++){
@@ -51,9 +51,9 @@ class Fetch2 extends React.Component{
     }
 
     data2=()=>{
-      let project = localStorage.getItem('project');
-      let url = localStorage.getItem('url');
-      let array = [];
+      const project = localStorage.getItem('project');
+      const url = localStorage.getItem('url');
+      const array = [];
       return new Promise( (resolve, reject) => {
 
       for(let i=0;i<this.state.data.length;i++){
@@ -72,9 +72,9 @@ class Fetch2 extends React.Component{
                 let resolvedSum = 0;
                 let doneSum = 0;
                 let storyPointSum = 0;
-                let anotherArray = [];
+                const anotherArray = [];
                 let storyPoint = 0;
-                let count = res.total;
+                const count = res.total;
 
                 for(let i =0;i<count ;i++){
                   if(res.issues[i].fields.project.key ===  `${[project]}`){
@@ -116,7 +116,7 @@ class Fetch2 extends React.Component{
                 }
                 
 
-               let obj ={
+               const obj ={
                    
                     assignee:res.issues[0].fields.assignee.name,
                     open:todoStoryPoint,
@@ -142,7 +142,7 @@ class Fetch2 extends React.Component{
                     doneSum = doneSum + this.state.actualData[i].done;
                     storyPointSum = storyPointSum + this.state.actualData[i].story_point;
                   }
-                  let obj2 = {
+                  const obj2 = {
                     todoSum :todoSum,
                     acceptedSum :acceptedSum,
                     inProgressSum:inProgressSum,
@@ -170,7 +170,7 @@ class Fetch2 extends React.Component{
    
    
   render(){
-    //debugger;
+   
     let posts ;
     if(this.state.actualData.length > 0) {
       posts =   <><br/>

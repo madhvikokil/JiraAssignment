@@ -5,6 +5,7 @@ import superagent from 'superagent';
 import '../../Assets/loginError.css';
 import FormElements from '../../utility/formElements'
 import { withRouter } from 'react-router-dom';
+import { emailInput,tokenInput,urlInput}from './constLogin';
 
 class Login extends React.Component{
 
@@ -18,7 +19,7 @@ class Login extends React.Component{
         email:'',
         token:'',
         url:'',
-        errDiv:''
+        //errDiv:''
     }
 
      showErrorMsg = (msg) => {
@@ -52,7 +53,6 @@ class Login extends React.Component{
 
         else{
             let a = window.btoa(`${this.state.email}:${this.state.token}`);
-            console.log(a);
             localStorage.setItem('token',a);
             superagent
                 .get(`${this.state.url}/rest/api/3/project`)
@@ -61,9 +61,8 @@ class Login extends React.Component{
                 .set('Authorization', `Basic ${a}`)
                 .end((err, res) => {
                     if (err) { return alert("Invalid User",err)}
+                     if(res.body == null) 
                     localStorage.setItem('url',`${this.state.url}`);
-                    console.log("response : ",res.body);
-                    console.log("Table routing");
                     alert("Successfully Logged...");
                     this.props.history.push('/tablesheet');
           
@@ -97,32 +96,9 @@ class Login extends React.Component{
         this.setState({url : event.target.value})
     }
 
+   
     render(){
-        console.log("props : ",this.props)
-         let emailInput ={
-           placeholder:"E-mail address",
-           value:this.state.email,
-           onChange:this.changeEmail,
-           icon:"user",
-           type:"email"
-       }
-
-       let tokenInput ={
-        placeholder:"Token",
-        value:this.state.token,
-        onChange:this.changeToken,
-        icon:"lock",
-        type:"text"
-       }
-
-       let urlInput ={
-        placeholder:"Url",
-        value:this.state.url,
-        onChange:this.changeUrl,
-        icon:"lock",
-        tyoe:"text"
-       }
-        
+           
         return(<>
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
@@ -133,9 +109,9 @@ class Login extends React.Component{
                     <Form size='large'>
                         <Segment stacked>
                     
-                    {this.props.inputhere(emailInput)}
-                    {this.props.inputhere(tokenInput)}
-                    {this.props.inputhere(urlInput)}
+                    {this.props.inputhere({ ...emailInput, onChange: this.changeEmail,value:this.state.email})}
+                    {this.props.inputhere({...tokenInput,onChange: this.changeToken,value:this.state.token})}
+                    {this.props.inputhere({...urlInput,onChange: this.changeUrl,value:this.state.url})}
 
                     <Button color='teal' fluid size='large' onClick={this.listOfProjects}>
                         Login
