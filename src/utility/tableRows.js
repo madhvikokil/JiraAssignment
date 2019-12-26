@@ -45,7 +45,7 @@ export default{
                     return  <ProgressBar.displayProgressBar aValue={props.data[key]} bar={bar} colors={colors}/>
                 }
                     
-                if(key === 'time_Spent_in_hour') {
+                if(key === 'time_Spent_in_days') {
                     let colors ="#14892c";
                     let bar = props.data[key] * 100 / props.item.spentSum;
                     bar = Math.floor(bar)

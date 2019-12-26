@@ -90,7 +90,7 @@ class Fetch extends React.Component{
             story_Point : storyPoint,
             Original_Estimate_in_hour : value2,
             remaining_Estimate_in_hour : value3,
-            time_Spent_in_hour : value
+            time_Spent_in_days : value
           }
        
         this.setState({actualData:[...this.state.actualData,obj]});
