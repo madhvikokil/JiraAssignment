@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
-import superagent from 'superagent';
+import FetchApi from '../../utility/apiCalls';
 import '../../Assets/loginError.css';
 import FormElements from '../../utility/formElements'
 import { withRouter } from 'react-router-dom';
@@ -19,7 +19,7 @@ class Login extends React.Component{
         email:'',
         token:'',
         url:'',
-        //errDiv:''
+        errDiv:''
     }
 
      showErrorMsg = (msg) => {
@@ -32,17 +32,17 @@ class Login extends React.Component{
     listOfProjects = () => {
         let errorMessage="Enter ";
         let flag = false;
-        if(this.state.email === ""){
+        if(this.state.email === "" || this.state.email === undefined){
             flag = true;
             errorMessage += " Email";
         }
        
-        if(this.state.token === ""){
+        if(this.state.token === "" || this.state.token === undefined){
             flag = true;
             errorMessage += " Token";
         }
 
-        if(this.state.url === ""){
+        if(this.state.url === "" || this.state.email === undefined){
             flag = true;
             errorMessage += " Url";
         }
@@ -54,35 +54,37 @@ class Login extends React.Component{
         else{
             let a = window.btoa(`${this.state.email}:${this.state.token}`);
             localStorage.setItem('token',a);
-            superagent
-                .get(`${this.state.url}/rest/api/3/project`)
-                .set('Access-Control-Allow-Credentials', '*')
-                .set('Accept', 'application/json')
-                .set('Authorization', `Basic ${a}`)
-                .end((err, res) => {
-                    if (err) { return alert("Invalid User",err)}
-                     if(res.body == null) 
-                    localStorage.setItem('url',`${this.state.url}`);
-                    alert("Successfully Logged...");
-                    this.props.history.push('/tablesheet');
+            // superagent
+            //     .get(`${this.state.url}/rest/api/3/project`)
+            //     .set('Access-Control-Allow-Credentials', '*')
+            //     .set('Accept', 'application/json')
+            //     .set('Authorization', `Basic ${a}`)
+            //     .end((err, res) => {
+            //         if (err) { return alert("Invalid User",err)}
+            //          if(res.body == null) 
+            //         localStorage.setItem('url',`${this.state.url}`);
+            //         alert("Successfully Logged...");
+            //         this.props.history.push('/tablesheet');
           
-                })
+            //     })
+
+             FetchApi.callApi(`${this.state.url}/rest/api/3/project`)
+        .then(res=>{
+            if(res.length === 0) {
+                alert("InCorrect email");
+                
+            }
+            else if(res){
+                localStorage.setItem('url',`${this.state.url}`);
+                alert("Successfully Logged...");
+                this.props.history.push('/tablesheet');
+            }
+            
+        }).catch(error=>{
+            alert("Invalid User",error);
+        })
         }
-
-
-       
-        // FetchApi.callApi(`${this.state.url}/rest/api/2/user/assignable/search?project=REAC`)
-        // .then(res=>{
-        //     localStorage.setItem('url',`${this.state.url}`);
-        //         console.log("response : ",res.body);
-        //         console.log("Table routing");
-        //         alert("Successfully Logged...");
-        //         this.props.history.push('/tableSheet/table1');
-        // }).catch(error=>{
-        //     alert("Invalid User",error);
-        // })
-        
-    }
+}
 
     changeEmail = (event) => {
         this.setState({email : event.target.value})
@@ -98,7 +100,7 @@ class Login extends React.Component{
 
    
     render(){
-           
+           console.log("props : ",this.props);
         return(<>
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>

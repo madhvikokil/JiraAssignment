@@ -3,7 +3,8 @@ export const emailInput ={
     
     placeholder:"E-mail address",
     icon:"user",
-    type:"email"
+    type:"email",
+    
 }
 
 export const tokenInput ={

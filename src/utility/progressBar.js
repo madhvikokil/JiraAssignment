@@ -3,9 +3,9 @@ import React from 'react';
 export default{
 
     displayProgressBar: (props) => {
-        return (<td key={props.aValue}>{props.aValue}&nbsp;&nbsp;
+        return (<td key={props.aValue}><span className="underLine-name">{props.aValue}</span>&nbsp;&nbsp;
               <div class="progress">
-                     <div class="inside" style={{width:`${props.bar}` + 'px',backgroundColor:`${props.colors}`}}>_</div>  &nbsp;&nbsp;                
+                     <div class="inside underLine-name" style={{width:`${props.bar}` + 'px',backgroundColor:`${props.colors}`}}></div>  &nbsp;&nbsp;                
                       </div>&nbsp;&nbsp;{props.bar+'%'}
                     </td>)
 

@@ -7,7 +7,8 @@ const InputHere =(props) => {
     
     <Form.Input type="text" 
              iconPosition='left' 
-             class="required"
+             validators={["required"]}
+             errorMessages={["Field Required"]}
              placeholder={props && props.placeholder}
              value={props && props.value}
              onChange={props && props.onChange}

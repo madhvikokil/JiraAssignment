@@ -11,10 +11,9 @@ const Projects = lazy(() => import('./Projects/component/projects'));
 function App() {
   let routes =(
     <Switch>
-      
       <Route path="/tablesheet" exact component={Projects} />
-      <Route path="/tableSheet/table1" exact component={OutputStatisticsTable} />
-      <Route path="/tableSheet/table2" component={storyPointTable} />
+      <Route path="/tablesheet/table1" exact component={OutputStatisticsTable} />
+      <Route path="/tablesheet/table2" component={storyPointTable} />
       <Route path="/logout"  component={Logout} /> 
       <Route path="/" exact component={Login} />
   </Switch>

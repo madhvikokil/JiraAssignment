@@ -12,6 +12,19 @@ hr{
 }
 .table{
     margin-bottom: 0;
+    width: 100%;
+    border-collapse: collapse;
+    color: #212529;
+    border-spacing: 0
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.underLine-name:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
 .editRows {
     
@@ -21,6 +34,12 @@ hr{
     margin: 0px;
     font-size: 15px;
     padding: 10px 64px 10px 10px;
+    border-bottom: 1px solid #c1c7d0;
+    height:40px;
+}
+tr{
+    height:40px;
+    border-bottom: 1px solid #c1c7d0;
 }
 
 .specificRowBackground{
@@ -53,10 +72,11 @@ hr{
     font-weight: 900;
     line-height: 10%;
     margin: 0;
-    padding: 2px 5px;
+    padding: 10px 5px;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
     background-color: #dfe1e5;
 }
 
+tr:hover {background-color:#f5f5f5;}

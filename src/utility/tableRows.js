@@ -6,14 +6,14 @@ import '../Assets/tableEdit.css';
 export default{
     RenderRow:(props) => {
         return props.keys.map((key, index)=>{
-        return <td class="editRow" style={{backgroundColor:index === 7 ? 'rgb(244,245,247)' : null,fontWeight:index === '7' ? '800' : null}} key={props.data[key]}>{props.data[key]}</td>
+        return <td class="editRow " style={{backgroundColor:index === 7 ? 'rgb(244,245,247)' : null,fontWeight:index === '7' ? '800' : null}} key={props.data[key]}><span className="underLine-name">{props.data[key]}</span></td>
         })
        },
 
     RenderProgressRow:(props) =>{
         return props.keys.map((key) => {
             if(typeof props.data[key] == 'string'){
-                return <td  key={props.data[key]}>{props.data[key]}</td>
+                return <td  key={props.data[key]}><span className="underLine-name">{props.data[key]}</span></td>
             }
             if(typeof props.data[key] != 'string'){
                 if(key === 'issue_count') {

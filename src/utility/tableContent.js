@@ -52,7 +52,7 @@ export default {
             })
         }
         return items.map((row, index)=>{
-        return <tr key={index} ><FetchBody.RenderRow key={index} data={row} keys={keys} /></tr>
+        return <tr  key={index} ><FetchBody.RenderRow key={index} data={row} keys={keys} /></tr>
         })
     },
 
@@ -71,7 +71,7 @@ export default {
                    
          <td class="editRow" key={key}><b>{key}</b>&nbsp;
                 <div class="progress">
-                <div class="inside" style={{width:100+'px',backgroundColor:`${colorObject[index]}`}} >_</div>&nbsp;
+                <div class="inside" style={{width:100+'px',backgroundColor:`${colorObject[index]}`}} ></div>&nbsp;
                 </div><b>100%</b>
         </td>))
         }

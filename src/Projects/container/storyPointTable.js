@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import FetchApi from '../../utility/apiCalls';
 import FetchTable from '../../utility/tableContent';
@@ -17,22 +19,10 @@ class Fetch2 extends React.Component{
         totalCount:[]
   }
 
-  componentDidMount =async()=>{ 
+  componentDidMount =()=>{ 
 
-    const data1 = await this.data();
-    console.log("DATA 1 ===>>>", data1);
-    const data2 = await this.data2();
-    console.log("Data 2  => ",data2);
-    console.log("updated array : ",this.state.actualData);
-    }
-
-    tableData=()=>{
-      FetchTable.tableHeader(this.state.data);
-    }
-
-    data =() =>{
       const project = localStorage.getItem('project');
-     return new Promise( (resolve, reject) => {
+      return new Promise( (resolve, reject) => {
       const url = localStorage.getItem('url');
       const arrayOfUsers = [];
       
@@ -41,127 +31,130 @@ class Fetch2 extends React.Component{
               arrayOfUsers.push(res[i].name);
             }
             this.setState({data : arrayOfUsers});
-            resolve(arrayOfUsers);
+            const array =[];
+
+            return new Promise( (resolve, reject) => {
+
+              for(let i=0;i<this.state.data.length;i++){
+                const api = FetchApi.callApi(`${url}/rest/api/3/search?jql=assignee=${this.state.data[i]}`);
+              api.then(res => {
+                        let inProgressStoryPointCount = 0;
+                        let todoStoryPoint = 0;
+                        let doneStoryPoint = 0;
+                        let reviewStoryPoint = 0;
+                        let acceptedStoryPoint = 0;
+                        let resolvedStoryPoint = 0;
+                        let inProgressSum = 0;
+                        let acceptedSum = 0;
+                        let todoSum = 0;
+                        let reviewSum = 0;
+                        let resolvedSum = 0;
+                        let doneSum = 0;
+                        let storyPointSum = 0;
+                        const anotherArray = [];
+                        let storyPoint = 0;
+                        const count = res.total;
+        
+                        for(let i =0;i<count ;i++){
+                          if(res.issues[i].fields.project.key ===  `${[project]}`){
+                            anotherArray.push(res.issues[i].fields.assignee.name);
+                            storyPoint =storyPoint +  res.issues[i].fields.customfield_10024;
+                          
+                            if(res.issues[i].fields.status.name === "In Progress"){
+                                inProgressStoryPointCount = inProgressStoryPointCount + res.issues[i].fields.customfield_10024;
+                                
+                              }
+                            
+                             if(res.issues[i].fields.status.name === "To Do" || res.issues[i].fields.status.name === "Open"){
+                                todoStoryPoint = todoStoryPoint + res.issues[i].fields.customfield_10024;
+                    
+                              }
+                            
+                              if(res.issues[i].fields.status.name === "Done"){
+                                doneStoryPoint = doneStoryPoint + res.issues[i].fields.customfield_10024;
+                            
+                              }
+                            
+                               if(res.issues[i].fields.status.name === "Review"){
+                                reviewStoryPoint = reviewStoryPoint + res.issues[i].fields.customfield_10024;
+                                
+                              }
+        
+                               if(res.issues[i].fields.status.name === "Accepted"){
+                                acceptedStoryPoint = acceptedStoryPoint + res.issues[i].fields.customfield_10024;
+                              }
+                            
+                               if(res.issues[i].fields.status.name === "Resolved"){
+                                resolvedStoryPoint = resolvedStoryPoint + res.issues[i].fields.customfield_10024;
+                              }
+        
+                          }
+           
+        
+                          
+                        }
+                        
+        
+                       const obj ={
+                           
+                            assignee:res.issues[0].fields.assignee.name,
+                            open:todoStoryPoint,
+                            accepted:acceptedStoryPoint,
+                            in_Progress:inProgressStoryPointCount,
+                            review:reviewStoryPoint,
+                            resolved:resolvedStoryPoint,  
+                            done:doneStoryPoint,
+        
+                            story_point:storyPoint
+                        }
+        
+                       
+                        this.setState({actualData:[...this.state.actualData,obj]});
+                                 
+                        if(this.state.data.length-1 === this.state.actualData.length-1){
+                          for(let i=0;i<this.state.actualData.length;i++){
+                            inProgressSum = inProgressSum + this.state.actualData[i].in_Progress;
+                            acceptedSum = acceptedSum + this.state.actualData[i].accepted;
+                            todoSum = todoSum + this.state.actualData[i].open;
+                            reviewSum = reviewSum + this.state.actualData[i].review;
+                            resolvedSum = resolvedSum + this.state.actualData[i].resolved;
+                            doneSum = doneSum + this.state.actualData[i].done;
+                            storyPointSum = storyPointSum + this.state.actualData[i].story_point;
+                          }
+                          const obj2 = {
+                            todoSum :todoSum,
+                            acceptedSum :acceptedSum,
+                            inProgressSum:inProgressSum,
+                            reviewSum :reviewSum,
+                            resolvedSum :resolvedSum,
+                            doneSum :doneSum,
+                            storyPointSum:storyPointSum
+                          }
+                        this.setState({totalCount:obj2});
+                        localStorage.setItem('sum',JSON.stringify(obj2));
+                        resolve(array);
+                    }
+        
+              }).catch(error => {
+                reject(error);
+                  })
+              }  
+            })
          
           }).catch(error => {
         reject(error);
           })
 
-     } )
+     })
+    
+
+  
+   
     }
 
-    data2=()=>{
-      const project = localStorage.getItem('project');
-      const url = localStorage.getItem('url');
-      const array = [];
-      return new Promise( (resolve, reject) => {
-
-      for(let i=0;i<this.state.data.length;i++){
-        const api = FetchApi.callApi(`${url}/rest/api/3/search?jql=assignee=${this.state.data[i]}`);
-      api.then(res => {
-                let inProgressStoryPointCount = 0;
-                let todoStoryPoint = 0;
-                let doneStoryPoint = 0;
-                let reviewStoryPoint = 0;
-                let acceptedStoryPoint = 0;
-                let resolvedStoryPoint = 0;
-                let inProgressSum = 0;
-                let acceptedSum = 0;
-                let todoSum = 0;
-                let reviewSum = 0;
-                let resolvedSum = 0;
-                let doneSum = 0;
-                let storyPointSum = 0;
-                const anotherArray = [];
-                let storyPoint = 0;
-                const count = res.total;
-
-                for(let i =0;i<count ;i++){
-                  if(res.issues[i].fields.project.key ===  `${[project]}`){
-                    anotherArray.push(res.issues[i].fields.assignee.name);
-                    storyPoint =storyPoint +  res.issues[i].fields.customfield_10024;
-                  
-                    if(res.issues[i].fields.status.name === "In Progress"){
-                        inProgressStoryPointCount = inProgressStoryPointCount + res.issues[i].fields.customfield_10024;
-                        
-                      }
-                    
-                     if(res.issues[i].fields.status.name === "To Do" || res.issues[i].fields.status.name === "Open"){
-                        todoStoryPoint = todoStoryPoint + res.issues[i].fields.customfield_10024;
-            
-                      }
-                    
-                      if(res.issues[i].fields.status.name === "Done"){
-                        doneStoryPoint = doneStoryPoint + res.issues[i].fields.customfield_10024;
-                    
-                      }
-                    
-                       if(res.issues[i].fields.status.name === "Review"){
-                        reviewStoryPoint = reviewStoryPoint + res.issues[i].fields.customfield_10024;
-                        
-                      }
-
-                       if(res.issues[i].fields.status.name === "Accepted"){
-                        acceptedStoryPoint = acceptedStoryPoint + res.issues[i].fields.customfield_10024;
-                      }
-                    
-                       if(res.issues[i].fields.status.name === "Resolved"){
-                        resolvedStoryPoint = resolvedStoryPoint + res.issues[i].fields.customfield_10024;
-                      }
-
-                  }
    
 
-                  
-                }
-                
-
-               const obj ={
-                   
-                    assignee:res.issues[0].fields.assignee.name,
-                    open:todoStoryPoint,
-                    accepted:acceptedStoryPoint,
-                    in_Progress:inProgressStoryPointCount,
-                    review:reviewStoryPoint,
-                    resolved:resolvedStoryPoint,  
-                    done:doneStoryPoint,
-
-                    story_point:storyPoint
-                }
-
-               
-                this.setState({actualData:[...this.state.actualData,obj]});
-                         
-                if(this.state.data.length-1 === this.state.actualData.length-1){
-                  for(let i=0;i<this.state.actualData.length;i++){
-                    inProgressSum = inProgressSum + this.state.actualData[i].in_Progress;
-                    acceptedSum = acceptedSum + this.state.actualData[i].accepted;
-                    todoSum = todoSum + this.state.actualData[i].open;
-                    reviewSum = reviewSum + this.state.actualData[i].review;
-                    resolvedSum = resolvedSum + this.state.actualData[i].resolved;
-                    doneSum = doneSum + this.state.actualData[i].done;
-                    storyPointSum = storyPointSum + this.state.actualData[i].story_point;
-                  }
-                  const obj2 = {
-                    todoSum :todoSum,
-                    acceptedSum :acceptedSum,
-                    inProgressSum:inProgressSum,
-                    reviewSum :reviewSum,
-                    resolvedSum :resolvedSum,
-                    doneSum :doneSum,
-                    storyPointSum:storyPointSum
-                  }
-                this.setState({totalCount:obj2});
-                localStorage.setItem('sum',JSON.stringify(obj2));
-                resolve(array);
-            }
-
-      }).catch(error => {
-        reject(error);
-          })
-      }  
-    })
-  }
+    
     
     lastTable=()=>{
         this.props.history.goBack();
