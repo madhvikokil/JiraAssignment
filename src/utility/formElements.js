@@ -6,18 +6,18 @@ const InputHere =(props) => {
     return(<>
     
     <Form.Input type="text" 
-             iconPosition='left' 
-             validators={["required"]}
-             errorMessages={["Field Required"]}
-             placeholder={props && props.placeholder}
-             value={props && props.value}
-             onChange={props && props.onChange}
-             icon={props && props.icon}
+             iconPosition = 'left' 
+             validators = {["required"]}
+             errorMessages = {["Field Required"]}
+             placeholder = {props && props.placeholder}
+             value = {props && props.value}
+             onChange = {props && props.onChange}
+             icon = {props && props.icon}
             ></Form.Input></> )
 }
 
 const objectStorage ={
-    inputhere : InputHere,
+    inputHere : InputHere,
     
     
 }

@@ -5,7 +5,7 @@ import FetchApi from '../../utility/apiCalls';
 import '../../Assets/loginError.css';
 import FormElements from '../../utility/formElements'
 import { withRouter } from 'react-router-dom';
-import { emailInput,tokenInput,urlInput}from './constLogin';
+import { emailInput,tokenInput,urlInput}from '../../Constants/constLogin';
 
 class Login extends React.Component{
 
@@ -86,21 +86,25 @@ class Login extends React.Component{
         }
 }
 
-    changeEmail = (event) => {
-        this.setState({email : event.target.value})
-    }
+onChangehandler = (field,event) => {
+    this.setState({[field] : event.target.value})
+    console.log('set value : ',field);
+}
+    // changeEmail = (event) => {
+    //     this.setState({email : event.target.value})
+    // }
 
-    changeToken = (event) => {
-        this.setState({token : event.target.value})
-    }
+    // changeToken = (event) => {
+    //     this.setState({token : event.target.value})
+    // }
 
-    changeUrl = (event) => {
-        this.setState({url : event.target.value})
-    }
+    // changeUrl = (event) => {
+    //     this.setState({url : event.target.value})
+    // }
 
    
     render(){
-           console.log("props : ",this.props);
+         
         return(<>
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
@@ -111,9 +115,9 @@ class Login extends React.Component{
                     <Form size='large'>
                         <Segment stacked>
                     
-                    {this.props.inputhere({ ...emailInput, onChange: this.changeEmail,value:this.state.email})}
-                    {this.props.inputhere({...tokenInput,onChange: this.changeToken,value:this.state.token})}
-                    {this.props.inputhere({...urlInput,onChange: this.changeUrl,value:this.state.url})}
+                    {this.props.inputHere({ ...emailInput, onChange:(event)=> this.onChangehandler("email", event), value:this.state.email})}
+                    {this.props.inputHere({...tokenInput,onChange:(event)=> this.onChangehandler("token", event), value:this.state.token})}
+                    {this.props.inputHere({...urlInput,onChange:(event) => this.onChangehandler("url", event), value:this.state.url})}
 
                     <Button color='teal' fluid size='large' onClick={this.listOfProjects}>
                         Login
