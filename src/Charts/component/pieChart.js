@@ -65,9 +65,7 @@ export default class Chart extends PureComponent {
 				}
 			</Pie>
 		</PieChart> 
-			 
-			 
-            </>
+	 </>
 		);
 	}
 }

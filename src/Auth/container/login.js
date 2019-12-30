@@ -5,17 +5,11 @@ import FetchApi from '../../utility/apiCalls';
 import '../../Assets/loginError.css';
 import FormElements from '../../utility/formElements'
 import { withRouter } from 'react-router-dom';
-import { emailInput,tokenInput,urlInput}from '../../Constants/constLogin';
+import { emailInput, tokenInput, urlInput} from '../../Constants/constLogin';
 
 class Login extends React.Component{
 
-    constructor(props){
-        super(props)
-        this.state={
-
-        }
-    }
-    state ={
+    state = {
         email:'',
         token:'',
         url:'',
@@ -54,20 +48,7 @@ class Login extends React.Component{
         else{
             let a = window.btoa(`${this.state.email}:${this.state.token}`);
             localStorage.setItem('token',a);
-            // superagent
-            //     .get(`${this.state.url}/rest/api/3/project`)
-            //     .set('Access-Control-Allow-Credentials', '*')
-            //     .set('Accept', 'application/json')
-            //     .set('Authorization', `Basic ${a}`)
-            //     .end((err, res) => {
-            //         if (err) { return alert("Invalid User",err)}
-            //          if(res.body == null) 
-            //         localStorage.setItem('url',`${this.state.url}`);
-            //         alert("Successfully Logged...");
-            //         this.props.history.push('/tablesheet');
           
-            //     })
-
              FetchApi.callApi(`${this.state.url}/rest/api/3/project`)
         .then(res=>{
             if(res.length === 0) {
@@ -88,21 +69,7 @@ class Login extends React.Component{
 
 onChangehandler = (field,event) => {
     this.setState({[field] : event.target.value})
-    console.log('set value : ',field);
 }
-    // changeEmail = (event) => {
-    //     this.setState({email : event.target.value})
-    // }
-
-    // changeToken = (event) => {
-    //     this.setState({token : event.target.value})
-    // }
-
-    // changeUrl = (event) => {
-    //     this.setState({url : event.target.value})
-    // }
-
-   
     render(){
          
         return(<>

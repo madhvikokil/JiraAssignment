@@ -34,12 +34,12 @@ hr{
     margin: 0px;
     font-size: 15px;
     padding: 10px 64px 10px 10px;
-    border-bottom: 1px solid #c1c7d0;
+    border-bottom: 1px solid rgba(0,0,0,.1);
     height:40px;
 }
 tr{
     height:40px;
-    border-bottom: 1px solid #c1c7d0;
+    border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
 .specificRowBackground{

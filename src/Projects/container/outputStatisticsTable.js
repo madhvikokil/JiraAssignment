@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import '../../Assets/tableEdit.css';
 
-class Fetch extends React.Component{
+class Fetch extends React.Component {
   
   state = {
         data:[],
@@ -110,15 +110,9 @@ class Fetch extends React.Component{
           reject(error);
             })
         })
-      
-  
-      
+     }
 
-    
-    }
-
- 
-    anotherTable = () => {
+  anotherTable = () => {
       this.props.history.push("/tableSheet/table2");
     }
      

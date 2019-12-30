@@ -1,23 +1,21 @@
-
-
 import React from 'react';
 import FetchApi from '../../utility/apiCalls';
 import FetchTable from '../../utility/tableContent';
 import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import '../../Assets/tableEdit.css';
-import Chart from '../../Charts/component/chart';
-import Chart2 from '../../Charts/component/chart2';
+import Chart from '../../Charts/component/pieChart';
+import Chart2 from '../../Charts/component/barGraph';
 
 
 class Fetch2 extends React.Component{
 
-  state={
+  state = {
         data:[],
         actualData:[],
         length:'',
         totalCount:[]
-  }
+    }
 
   componentDidMount =()=>{ 
 
@@ -87,11 +85,7 @@ class Fetch2 extends React.Component{
                                if(res.issues[i].fields.status.name === "Resolved"){
                                 resolvedStoryPoint = resolvedStoryPoint + res.issues[i].fields.customfield_10024;
                               }
-        
                           }
-           
-        
-                          
                         }
                         
         
@@ -104,7 +98,6 @@ class Fetch2 extends React.Component{
                             review:reviewStoryPoint,
                             resolved:resolvedStoryPoint,  
                             done:doneStoryPoint,
-        
                             story_point:storyPoint
                         }
         
@@ -146,17 +139,9 @@ class Fetch2 extends React.Component{
           })
 
      })
-    
+  }
 
-  
-   
-    }
-
-   
-
-    
-    
-    lastTable=()=>{
+  lastTable=()=>{
         this.props.history.goBack();
     }
 
@@ -185,7 +170,6 @@ class Fetch2 extends React.Component{
               <td class="editRow "><b>Total:</b> </td>{FetchTable.tableFooter(this.state.totalCount)}
             </tr>
           <tr class="editRow  "><td>{localStorage.getItem('total')} total issues</td></tr>
-          {/* <Chart count ={this.state.totalCount} /> */}
           </tfoot>
         :null}   
        </table><hr/>
