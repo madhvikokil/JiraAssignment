@@ -98,7 +98,7 @@ class Fetch2 extends React.Component{
                             review:reviewStoryPoint,
                             resolved:resolvedStoryPoint,  
                             done:doneStoryPoint,
-                            story_point:storyPoint
+                            total:storyPoint
                         }
         
                        
@@ -112,7 +112,7 @@ class Fetch2 extends React.Component{
                             reviewSum = reviewSum + this.state.actualData[i].review;
                             resolvedSum = resolvedSum + this.state.actualData[i].resolved;
                             doneSum = doneSum + this.state.actualData[i].done;
-                            storyPointSum = storyPointSum + this.state.actualData[i].story_point;
+                            storyPointSum = storyPointSum + this.state.actualData[i].total;
                           }
                           const obj2 = {
                             todoSum :todoSum,
@@ -182,18 +182,17 @@ class Fetch2 extends React.Component{
       <Button class="ui button"  style={{float:'left'}} as={Link} to ='/tablesheet'>Project List</Button>
       <Button class="ui button"  style={{float:'right'}} as={Link} to ='/logout'>Log out</Button>  <br /><br />
       {posts}
-      <Button onClick={this.lastTable}>  Previous  </Button>
+      <Button onClick={this.lastTable}>  Previous  </Button><br/><br/>
       {this.state.totalCount.todoSum  ? 
        <Chart style={{float:'right'}}
        data={this.state.totalCount}
-        />  :null
+        />  :"No charts found"
       }
 
-{this.state.totalCount.todoSum  ? 
+      {this.state.totalCount.todoSum  ? 
        <Chart2
        data={this.state.totalCount}
-      
-        />  :null}
+      />  :null}
       
   </>
 

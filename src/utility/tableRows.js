@@ -23,7 +23,7 @@ export default{
                    return  <ProgressBar.displayProgressBar aValue={props.data[key]} bar={bar} colors={colors}/>
             
                 }
-                if(key === 'story_Point') {
+                if(key === 'story_Points') {
                     const colors = '#42526e';
                     let bar = props.data[key] * 100 / props.item.storyPointSum;
                     bar = Math.floor(bar);
@@ -31,21 +31,21 @@ export default{
                     return  <ProgressBar.displayProgressBar aValue={props.data[key]} bar={bar} colors={colors}/>
                 }
 
-                if(key === 'Original_Estimate_in_hour') {
+                if(key === 'Original_Estimate_in_hours') {
                     const colors='#654982';
                     let bar = props.data[key] * 100 / props.item.originalSum;
                     bar = Math.floor(bar)
                     return  <ProgressBar.displayProgressBar aValue={props.data[key]} bar={bar} colors={colors}/>
                 }
 
-                if(key === 'remaining_Estimate_in_hour') {
+                if(key === 'remaining_Estimate_in_hours') {
                     const colors = '#f15c75';
                     let bar = props.data[key] * 100 / props.item.remainingSum;
                     bar = Math.floor(bar)
                     return  <ProgressBar.displayProgressBar aValue={props.data[key]} bar={bar} colors={colors}/>
                 }
                     
-                if(key === 'time_Spent_in_days') {
+                if(key === 'time_Spent_in_hours') {
                     const colors ="#14892c";
                     let bar = props.data[key] * 100 / props.item.spentSum;
                     bar = Math.floor(bar)

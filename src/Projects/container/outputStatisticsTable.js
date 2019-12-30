@@ -50,7 +50,7 @@ class Fetch extends React.Component {
               for(let i = 0; i < count ; i++){
                 
                  if(res.issues[i].fields.project.key === `${[project]}`) {
-                  storyPoint =storyPoint +  res.issues[i].fields.customfield_10024;
+                  storyPoint = storyPoint +  res.issues[i].fields.customfield_10024;
                   timeEstimate = timeEstimate + res.issues[i].fields.timeestimate;
                   timeSpent = timeSpent + res.issues[i].fields.timespent;
                   timeOriginalEstimate = timeOriginalEstimate + res.issues[i].fields.timeoriginalestimate;
@@ -67,10 +67,10 @@ class Fetch extends React.Component {
               const obj ={
                   user : res.issues[0].fields.assignee.name,
                   issue_count : finalCount,
-                  story_Point : storyPoint,
-                  Original_Estimate_in_hour : value2,
-                  remaining_Estimate_in_hour : value3,
-                  time_Spent_in_days : value
+                  story_Points : storyPoint,
+                  Original_Estimate_in_hours : value2,
+                  remaining_Estimate_in_hours : value3,
+                  time_Spent_in_hours : value
                 }
              
               this.setState({actualData:[...this.state.actualData,obj]});
@@ -78,10 +78,10 @@ class Fetch extends React.Component {
       
                 for(let i=0;i<this.state.actualData.length;i++) {
                   issueCountSum = issueCountSum + this.state.actualData[i].issue_count;
-                  storyPointSum = storyPointSum + this.state.actualData[i].story_Point;
-                  originalSum = originalSum + this.state.actualData[i].Original_Estimate_in_hour;
-                  remainingSum = remainingSum + this.state.actualData[i].remaining_Estimate_in_hour;
-                  spentSum = spentSum + this.state.actualData[i].time_Spent_in_days;
+                  storyPointSum = storyPointSum + this.state.actualData[i].story_Points;
+                  originalSum = originalSum + this.state.actualData[i].Original_Estimate_in_hours;
+                  remainingSum = remainingSum + this.state.actualData[i].remaining_Estimate_in_hours;
+                  spentSum = spentSum + this.state.actualData[i].time_Spent_in_hours;
                 }
       
                 const obj2 = {

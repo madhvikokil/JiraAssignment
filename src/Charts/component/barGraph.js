@@ -3,20 +3,26 @@ import '../../Assets/recharts.css';
 import { BarChart, XAxis, YAxis, Bar,Legend } from 'recharts';
  class Chart2 extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            array:[]
-        }
-        this.state ={
-            names : []
-        }
+    state ={
+        array:[]
     }
+    
 
 	componentDidMount(){
           
-		let s = Object.keys(this.props.data);
-			this.setState({array : s.map((key) => { return { value :this.props.data[key] }})});
+        // let s = Object.keys(this.props.data);
+        // delete s[6];
+        
+        //     this.setState({array : s.map((key) => { return { value :this.props.data[key],name : "hello" }})});
+        //     console.log("changed state : ",this.state.array);
+
+        let obj =['open','accepted','in_progress','review','resolved','done'];
+			let s = Object.values(this.props.data);
+			delete s[6];
+			
+			const dummy = s.map((key,index) => { return { value :s[index],name:obj[index]}});
+				console.log("array dumy : ",dummy);
+				this.setState({array : [...this.state.array,dummy]});
         }
 	
      render(){
@@ -25,16 +31,17 @@ import { BarChart, XAxis, YAxis, Bar,Legend } from 'recharts';
             <BarChart
 		width={500}
 		height={300}
-		data={this.state.array}
+		data={this.state.array[0]}
 		margin={{
 			top: 5, right: 30, left: 20, bottom: 5,
 		}}
 	>
-		<XAxis dataKey="value" />
+        <XAxis dataKey="name" />
+		{/* <XAxis dataKey="value" /> */}
 		<YAxis />
 		<Legend />
 		
-		<Bar dataKey="value" fill="#82ca9d" />
+		<br /><br /><Bar dataKey="value" fill="#82ca9d" />
 	</BarChart>
          )  
      }

@@ -3,6 +3,7 @@ import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import FetchApi from '../../utility/apiCalls';
 import '../../Assets/loginError.css';
+import '../../Assets/download.jpeg';
 import FormElements from '../../utility/formElements'
 import { withRouter } from 'react-router-dom';
 import { emailInput, tokenInput, urlInput} from '../../Constants/constLogin';
@@ -72,11 +73,14 @@ onChangehandler = (field,event) => {
 }
     render(){
          
-        return(<>
-            <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+        return(<><br/><br />
+            <h1 style={{color:'teal'}}>JIRA STATUS APPLICATION</h1>
+            <Grid textAlign='center' style={{ height: '75vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
+                
                 <Header as='h1' color='teal' textAlign='center'>
-                Log-in to your account
+                    
+                Log-in to Jira Account
                 </Header>
                
                     <Form size='large'>

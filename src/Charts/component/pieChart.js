@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import {PieChart,Pie,Cell} from 'recharts';
+import { PieChart, Pie, Cell } from 'recharts';
 import '../../Assets/recharts.css';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042','#ffcc00','#0000ff','#8000000'];
+const COLORS = ['#0088FE', '#F65F3F', '#0088FE', '#BA7C09','#0A7B25','#0000ff'];
 const RADIAN = Math.PI / 180;
 
 
@@ -12,19 +12,16 @@ export default class Chart extends PureComponent {
         array:[]
     }
 	
-    constructor(props){
-        super(props);
-        this.state = {
-            array:[]
-        }
-    }
+  
 
 	componentDidMount(){
-         
-			let s = Object.keys(this.props.data);
-			for(let i=0;i<s.length-1;i++){
-				this.setState({array : s.map((key) => { return { value :this.props.data[key] }})});
-			}
+			let obj =['open','accepted',"in_progress","review","resolved","done"];
+			let s = Object.values(this.props.data);
+			delete s[6];
+			
+			const dummy = s.map((key,index) => { return { value :s[index],name:obj[index]}});
+				console.log("array dumy : ",dummy);
+				this.setState({array : [...this.state.array,dummy]});
 		}
     
     renderCustomizedLabel = ({
@@ -45,12 +42,11 @@ export default class Chart extends PureComponent {
 		
 		return (
             <>
-            <p>{this.props.count}</p>
-            <p>{this.props.count2}</p>
 			
-			<PieChart width={400} height={400}>
+			<PieChart width={500} height={500}>
 			<Pie
-				data={this.state.array}
+				
+				data={this.state.array[0]}
 				cx={300}
 				cy={200}
 				labelLine={false}

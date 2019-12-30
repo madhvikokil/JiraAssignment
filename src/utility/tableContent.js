@@ -29,7 +29,7 @@ export default {
                 const ReplacedKey = key.replace(/_/g, ' ');
                 return <th key={key} ><td class="headerBox" style={{color:`${headerLabelColor[index]}`,backgroundColor:`${headerLabelBackgroundColor[index]}`}}>{ReplacedKey.toUpperCase()}</td></th>
             }
-            if(key === "story_point"){
+            if(key === "total"){
                 const ReplacedKey = key.replace(/_/g, ' ');
                 return <th key={key} style={{color:'#0747a6',backgroundColor:'rgb(244,245,247)',fontWeight:'800'}}>{ReplacedKey.toUpperCase()}</th>
             }
