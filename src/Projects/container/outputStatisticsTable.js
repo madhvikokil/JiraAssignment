@@ -1,24 +1,25 @@
-import React from 'react';
-import FetchApi from '../../utility/apiCalls';
-import FetchTable from '../../utility/tableContent';
-import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
-import '../../Assets/tableEdit.css';
+import React from "react";
+import FetchApi from "../../utility/apiCalls";
+import FetchTable from "../../utility/tableContent";
+import { Link } from "react-router-dom";
+import { Button } from "semantic-ui-react";
+import "../../Assets/tableEdit.css";
+
 
 class Fetch extends React.Component {
   
   state = {
         data:[],
         actualData:[],
-        length:'',
+        length:"",
         totalCount:[]
   }
   
   componentDidMount = () => { 
      
-      const project = localStorage.getItem('project');
+      const project = localStorage.getItem("project");
       return new Promise( (resolve, reject) => {
-      const url = localStorage.getItem('url');
+      const url = localStorage.getItem("url");
       const arrayOfUsers = [];
         
         FetchApi.callApi(`${url}/rest/api/2/user/assignable/search?project=${project}`).then(res => {
@@ -93,8 +94,8 @@ class Fetch extends React.Component {
                 }
       
                 this.setState({totalCount:obj2});
-                localStorage.setItem('total',this.state.totalCount.issueCountSum);
-                localStorage.setItem('issuecount',JSON.stringify(obj2));
+                localStorage.setItem("total",this.state.totalCount.issueCountSum);
+                localStorage.setItem("issuecount",JSON.stringify(obj2));
               
                 resolve(array);
               }  
@@ -136,7 +137,7 @@ class Fetch extends React.Component {
           {this.state.totalCount ? 
           <tfoot >
             <tr class="specificRowBackground">
-              <td class="editRow"><b>Total:</b> </td> {FetchTable.tableFooter(this.state.totalCount,'table1')}
+              <td class="editRow"><b>Total:</b> </td> {FetchTable.tableFooter(this.state.totalCount,"table1")}
             </tr>
              
          <tr class="editRow" ><td>{this.state.totalCount.issueCountSum} total issues </td></tr>
@@ -149,9 +150,10 @@ class Fetch extends React.Component {
   
   return(
       <>
+
       <br />
-      <Button class="ui button"  style={{float:'left'}} as={Link} to ='/tablesheet'>Project List</Button>
-      <Button class="ui button"  style={{float:'right'}} as={Link} to ='/logout'>Log out</Button><br /><br />
+      <Button class="ui button"  style={{float:"left"}} as={Link} to ="/tablesheet">Project List</Button>
+      <Button class="ui button"  style={{float:"right"}} as={Link} to ="/logout">Log out</Button><br /><br />
       {posts}
       <Button onClick={this.anotherTable}> Next >> </Button>
       </>

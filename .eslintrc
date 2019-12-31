@@ -1,16 +1,4 @@
 {
-    "parser": "babel-eslint",
-    "plugins": ["react"],
-    // "indent": ["error", "tab"],
-    // "space-in-brackets": ["error", "always" ,{
-    //     "singleValue": true 
-
-    // }],
-    // "rules" : {
-    //     // "arrow-body-style": ["error", "always"],
-    //     // "quotes": [ 1, "single", "avoid-escape" ]
-    // }
-   
-    // "indent": ["error", 2]
+    "extends":"react-app",
+    "rules":{}
 }
-    
