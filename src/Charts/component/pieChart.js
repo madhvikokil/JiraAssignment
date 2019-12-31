@@ -42,7 +42,8 @@ export default class Chart extends PureComponent {
 		return (
             <>
 			
-			<PieChart width={500} height={500}>
+			<PieChart width={500} height={300}>
+			<h3>Piechart </h3>
 			<Pie
 				
 				data={this.state.array}

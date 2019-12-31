@@ -1,10 +1,7 @@
 import React from "react";
 import FetchApi from "../../utility/apiCalls";
 import FetchTable from "../../utility/tableContent";
-import { Link } from "react-router-dom";
-import { Button } from "semantic-ui-react";
 import "../../Assets/tableEdit.css";
-
 
 class Fetch extends React.Component {
   
@@ -18,7 +15,7 @@ class Fetch extends React.Component {
   componentDidMount = () => { 
      
       const project = localStorage.getItem("project");
-      return new Promise( (resolve, reject) => {
+      
       const url = localStorage.getItem("url");
       const arrayOfUsers = [];
         
@@ -27,10 +24,7 @@ class Fetch extends React.Component {
                 arrayOfUsers.push(res[i].name);
           }
           this.setState({data : arrayOfUsers});
-          
-          const array = [];
-          return new Promise( (resolve, reject) => {
-      
+               
           for(let i=0;i<this.state.data.length;i++){
               const api = FetchApi.callApi(`${url}/rest/api/3/search?jql=assignee=${this.state.data[i]}`);
               api.then(res => {
@@ -50,7 +44,9 @@ class Fetch extends React.Component {
       
               for(let i = 0; i < count ; i++){
                 
-                 if(res.issues[i].fields.project.key === `${[project]}`) {
+                if(res.issues[i].fields.project.key === `${[project]}`) {
+                
+                  localStorage.setItem("activeUser",res.issues[i].fields.creator.displayName);
                   storyPoint = storyPoint +  res.issues[i].fields.customfield_10024;
                   timeEstimate = timeEstimate + res.issues[i].fields.timeestimate;
                   timeSpent = timeSpent + res.issues[i].fields.timespent;
@@ -97,20 +93,20 @@ class Fetch extends React.Component {
                 localStorage.setItem("total",this.state.totalCount.issueCountSum);
                 localStorage.setItem("issuecount",JSON.stringify(obj2));
               
-                resolve(array);
+              
               }  
                    
             }).catch(error => {
-              reject(error);
+              alert(error);
             })
           }  
-        })
+       
         
               
         }).catch(error => {
-          reject(error);
+          //reject(error);
             })
-        })
+       
      }
 
   anotherTable = () => {
@@ -150,12 +146,8 @@ class Fetch extends React.Component {
   
   return(
       <>
-
       <br />
-      <Button class="ui button"  style={{float:"left"}} as={Link} to ="/tablesheet">Project List</Button>
-      <Button class="ui button"  style={{float:"right"}} as={Link} to ="/logout">Log out</Button><br /><br />
-      {posts}
-      <Button onClick={this.anotherTable}> Next >> </Button>
+        {posts}
       </>
     )
   }

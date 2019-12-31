@@ -20,8 +20,8 @@ class Chart2 extends React.Component{
         }
 	
      render(){
-         return(
-             
+         return(<>
+             {/* <h3>Bar Graph of the the table</h3> */}
             <BarChart
 		width={500}
 		height={300}
@@ -36,7 +36,7 @@ class Chart2 extends React.Component{
 		<Legend />
 		
 		<br /><br /><Bar dataKey="value" fill="#82ca9d" />
-	</BarChart>
+	</BarChart></>
          )  
      }
  }

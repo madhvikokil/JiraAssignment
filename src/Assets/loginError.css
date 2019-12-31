@@ -17,3 +17,7 @@
     visibility: visible;
     animation: 0.75s;
   }
+
+  .ui-segment-pushable{
+    height:745px
+  }

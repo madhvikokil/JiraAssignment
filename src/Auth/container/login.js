@@ -57,6 +57,7 @@ class Login extends React.Component{
                 
             }
             else if(res){
+                console.log("new response : ",res);
                 localStorage.setItem("url",`${this.state.url}`);
                 alert("Successfully Logged...");
                 this.props.history.push("/tablesheet");

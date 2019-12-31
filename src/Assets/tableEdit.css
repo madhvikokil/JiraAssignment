@@ -15,7 +15,9 @@ hr{
     width: 100%;
     border-collapse: collapse;
     color: #212529;
-    border-spacing: 0
+    border-spacing: 0;
+    width: 91%;;
+    margin-left:125px;
 }
 
 *, ::after, ::before {
@@ -57,9 +59,10 @@ tr{
     color:white;
     text-align: left;
     padding:8px;
-    margin:0px;
+    margin-left:140px;
     font-size:15px;
-       font-weight: bold;
+    font-weight: bold;
+    margin-bottom: 0px;
     padding: 9px 87px 10px 53px;
 }
 

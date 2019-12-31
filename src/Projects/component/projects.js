@@ -2,6 +2,7 @@ import React from "react";
 import FetchApi from "../../utility/apiCalls";
 import { Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import '../../Assets/project.css';
 
 
 class Projects extends React.Component{
@@ -25,6 +26,7 @@ class Projects extends React.Component{
             for(let i=0;i<res.length;i++){
                 this.setState({projects:[...this.state.projects,res[i].key]})
             }
+            console.log("res : ",res)
             
         }).catch(error =>{
             alert(error);
@@ -46,10 +48,10 @@ class Projects extends React.Component{
             <>
             <h1 style={{color:"teal"}}>JIRA STATUS APPLICATION</h1>
             <Button class="ui button"  style={{float:"right"}} as={Link} to ="/">Logout</Button>
-
+            <div className="project-list">
             <h2 style={{float:"left",marginLeft:"20px",marginTop:"50px"}}>List of Projects</h2>
             <br /><br/><br/><br/><br/><br/>
-            {project}
+            {project}</div>
             </>
         )
     }
