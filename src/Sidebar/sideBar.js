@@ -59,7 +59,8 @@ class SidebarExampleVisible extends React.Component{
         {this.props.match.path === "/tablesheet/table2" ? 
          <StoreyPointTable /> : null
         }
-     
+        {this.props.match.path === "/tablesheet" ? 
+        <Project /> : null }
         
       </Segment>
     </Sidebar.Pusher>

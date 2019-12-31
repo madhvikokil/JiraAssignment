@@ -1,8 +1,9 @@
 import React from "react";
 import FetchApi from "../../utility/apiCalls";
 import { Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link ,withRouter} from "react-router-dom";
 import '../../Assets/project.css';
+
 
 
 class Projects extends React.Component{
@@ -57,4 +58,4 @@ class Projects extends React.Component{
     }
 }
 
-export default Projects;
+export default withRouter(Projects);
