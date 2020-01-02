@@ -4,11 +4,15 @@ import "../../Assets/recharts.css";
 
 export default class Chart extends PureComponent {
 
-    state={
-		array:[],
-		activeIndex:0
-    }
-	
+	constructor(props) {
+		super(props);
+		this.state = {
+			array : [],
+			activeIndex : 0,
+			loading : false
+		}
+	}
+   
 	onPieEnter = (data, index) => {
 		this.setState({
 		  activeIndex: index,
@@ -16,11 +20,13 @@ export default class Chart extends PureComponent {
 	  };
 
 	componentDidMount(){
+		
 			let obj =["open","accepted","inprogress","review","resolved","done"];
 			let s = Object.values(this.props.data);
 			delete s[6];
 			const dummy = s.map((key,index) => { return { value :s[index],name:obj[index]}});
 				this.setState({array :dummy});
+				
 		}
     
    
@@ -77,7 +83,8 @@ export default class Chart extends PureComponent {
 		return (
            
 			<div className="piechart-styling">
-				<h3>Pie Chart of the the table</h3>
+				
+				<h3>Pie Chart of the table</h3>
 				<PieChart width={400} height={400}>
 				<Pie
 				activeIndex={this.state.activeIndex}

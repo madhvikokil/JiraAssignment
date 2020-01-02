@@ -6,11 +6,15 @@ import { ClipLoader } from 'react-spinners';
 
 class Projects extends React.Component{
 
-    state = {
-        projects:[],
-        length:"",
-        loading:false
+    constructor(props) {
+        super(props);
+        this.state = {
+            projects:[],
+            length:"",
+            loading:false
+        }
     }
+    
     onClickHandler = (id) => {
         localStorage.setItem("project",id);
         this.props.history.push("/tablesheet/table1");
@@ -34,10 +38,12 @@ class Projects extends React.Component{
     render(){
         
         let project;
+       
+
         if(this.state.projects){
             project =
             this.state.projects.map(id => (<>
-                &nbsp;<button className="ui primary button" style={{float:"left",marginTop:"20px"}} onClick={() =>this.onClickHandler(id.value)}>{id.name}&nbsp; </button>&nbsp;</>
+               <button className="ui primary button" style={{float:"left",marginTop:"20px",marginRight:"20px"}} onClick={() =>this.onClickHandler(id.value)}>{id.name}</button></>
             ))
         }
        

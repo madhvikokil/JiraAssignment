@@ -6,13 +6,17 @@ import { ClipLoader } from 'react-spinners';
 
 class Fetch extends React.Component {
   
-  state = {
-        data:[],
+  constructor(props) {
+    super(props)
+    this.state = { 
+      data:[],
         actualData:[],
         length:"",
         totalCount:[],
         loading:false
+    }
   }
+  
   
   componentDidMount = () => { 
      
@@ -115,7 +119,9 @@ class Fetch extends React.Component {
   
     let posts ;
     if (this.state.actualData.length > 0) {
-      posts =   <> <br/><p className="tableHeader">Release Multiple Output Statistics</p>
+      posts =   <> 
+      <h3>JIRA STATUS APPLICATION </h3>
+      <p className="tableHeader">Release Multiple Output Statistics</p>
         <table className="table">
           <thead className="headerStyle">
            
@@ -144,7 +150,7 @@ class Fetch extends React.Component {
   
   return(
       <>
-      <br />
+      
         <ClipLoader
          
         sizeUnit={"100px"}

@@ -1,24 +1,33 @@
 import React from "react";
 import "../../Assets/recharts.css";
 import { BarChart, XAxis, YAxis, Bar } from "recharts";
+
+
 class BarGraph extends React.Component{
 
-    state ={
-        array:[]
-    }
+    constructor(props) {
+		super(props)
+			this.state = {
+				array:"",
+				loading : false
+			}
+		
+	}
     
 	componentDidMount(){
-       
-		let obj =["open","accept","progress","review","resolved","done"];
+       this.setState({loading : true})
+		let obj =["open","accepted","inprog","review","resolved","done"];
 			let s = Object.values(this.props.data);
 			delete s[6];
 			const dummy = s.map((key,index) => { return { value :s[index],name:obj[index]}});
 				this.setState({array : dummy});
+				
         }
 	
      render(){
          return(<div className="bargraph-styling">
-             <h3>Bar Graph of the the table</h3>
+             <h3>Bar Graph of the table</h3>
+			
 				<BarChart
 				width={500}
 				height={300}
@@ -32,6 +41,7 @@ class BarGraph extends React.Component{
 				<XAxis dataKey="value" /></div>
 				<YAxis />
 				<Bar dataKey="value" fill="#82ca9d" />
+				
 			</BarChart></div>
          )  
      }

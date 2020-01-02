@@ -10,12 +10,16 @@ import { emailInput, tokenInput, urlInput} from "../../Constants/constLogin";
 
 class Login extends React.Component{
 
-    state = {
-        email:"",
-        token:"",
-        url:"",
-        errDiv:""
-    }
+    constructor(props){
+        super(props);
+        this.state={
+            email:"",
+            token:"",
+            url:"",
+            errDiv:""
+        }
+      }
+    
 
      showErrorMsg = (msg) => {
         let errorMsg = document.getElementById("errorField");

@@ -11,9 +11,9 @@ const Login = lazy(() => import('./Auth/container/login'));
 function App() {
   let routes =(
     <Switch>
-      <Route path="/tablesheet" exact component={SidebarExampleVisible} />
       <Route path="/tablesheet/table1" exact component={SidebarExampleVisible} />
       <Route path="/tablesheet/table2" component={SidebarExampleVisible} />
+      <Route path="/tablesheet" exact component={SidebarExampleVisible} />
       <Route path="/logout"  component={Logout} /> 
       <Route path="/" exact component={Login} />
   </Switch>

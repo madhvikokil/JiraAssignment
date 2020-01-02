@@ -8,14 +8,17 @@ import { ClipLoader } from 'react-spinners';
 
 class Fetch2 extends React.Component{
 
-  state = {
+  constructor(props) {
+    super(props)
+    this.state = {
         data:[],
         actualData:[],
         length:"",
         totalCount:[],
         loading:false
     }
-
+  }
+ 
   componentDidMount =()=>{ 
 
       const project = localStorage.getItem('project');
@@ -142,7 +145,7 @@ class Fetch2 extends React.Component{
    
     let posts ;
     if(this.state.actualData.length > 0) {
-      posts =   <><br/>
+      posts =   <><h3>JIRA STATUS APPLICATION</h3>
       <p className="tableHeader">Story Points by Assignee and Status</p>
         <table className="table">
           <thead className="headerStyle">
