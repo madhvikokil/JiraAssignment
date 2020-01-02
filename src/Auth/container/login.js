@@ -21,7 +21,7 @@ class Login extends React.Component{
         }
       }
     
-    listOfProjects = () => {
+      loginHangler = () => {
         
             let a = window.btoa(`${this.state.email}:${this.state.token}`);
             localStorage.setItem("token",a);
@@ -68,7 +68,7 @@ class Login extends React.Component{
                     
                 Log-in to Jira Account
                 </Header>
-                    <Form size="huge" onSubmit={this.listOfProjects}>
+                    <Form size="huge" onSubmit={this.loginHangler}>
                         <Segment stacked>
                     
                     {this.props.inputHere({ ...emailInput, onChange:(event)=> this.onChangehandler("email", event), value:this.state.email})}
