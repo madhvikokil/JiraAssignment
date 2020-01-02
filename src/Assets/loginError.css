@@ -21,3 +21,7 @@
   .ui-segment-pushable{
     height:745px
   }
+
+  .ui.form .twelve.wide.field {
+    width: 100%!important;
+  }

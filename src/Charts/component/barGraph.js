@@ -4,23 +4,26 @@ import { BarChart, XAxis, YAxis, Bar } from "recharts";
 
 
 class BarGraph extends React.Component{
-
-    constructor(props) {
-		super(props)
-			this.state = {
-				array:"",
+	constructor(props) {
+		super(props);
+		this.state = {
+				arrays:[],
 				loading : false
 			}
+		}
 		
-	}
+	
     
 	componentDidMount(){
-       this.setState({loading : true})
+		const { arrays } = this.state;
+		console.log("this.state.arrays : ",arrays);
+	   	this.setState({loading : true})
 		let obj =["open","accepted","inprog","review","resolved","done"];
 			let s = Object.values(this.props.data);
 			delete s[6];
 			const dummy = s.map((key,index) => { return { value :s[index],name:obj[index]}});
-				this.setState({array : dummy});
+				this.setState({arrays : dummy});
+				
 				
         }
 	
@@ -31,7 +34,7 @@ class BarGraph extends React.Component{
 				<BarChart
 				width={500}
 				height={300}
-				data={this.state.array}
+				data={this.state.arrays}
 				margin={{
 					top: 5, right: 30, left: 20, bottom: 5,
 				}}

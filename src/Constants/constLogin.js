@@ -1,5 +1,5 @@
 
-export const emailInput ={
+export const emailInput = {
     
     placeholder:"E-mail address",
     icon:"user",
@@ -7,13 +7,13 @@ export const emailInput ={
     
 }
 
-export const tokenInput ={
+export const tokenInput = {
     placeholder:"Token",
     icon:"lock",
     type:"text"
    }
 
-export const  urlInput ={
+export const  urlInput = {
     placeholder:"Url",
     icon:"lock",
     type:"text"

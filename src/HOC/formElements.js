@@ -1,19 +1,19 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Input } from 'semantic-ui-react-form-validator';
 
 const InputHere =(props) => {
   
     return(<>
     
-    <Form.Input type="text" 
+    <Input type="text" 
              iconPosition = 'left' 
              validators = {["required"]}
              errorMessages = {["Field Required"]}
-             placeholder = {props && props.placeholder}
-             value = {props && props.value}
-             onChange = {props && props.onChange}
-             icon = {props && props.icon}
-            ></Form.Input></> )
+             placeholder = {props.placeholder}
+             value = { props.value}
+             onChange = {props.onChange}
+             icon = { props.icon}
+            ></Input></> )
 }
 
 const objectStorage ={

@@ -1,5 +1,6 @@
-import React from "react"
-import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
+import React from "react";
+import { Form } from "semantic-ui-react-form-validator";
+import { Button, Grid, Header, Segment } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import FetchApi from "../../utility/apiCalls";
 import "../../Assets/loginError.css";
@@ -20,47 +21,22 @@ class Login extends React.Component{
         }
       }
     
-
-     showErrorMsg = (msg) => {
-        let errorMsg = document.getElementById("errorField");
-        errorMsg.className = "show";
-        errorMsg.innerText = msg;
-        setTimeout(function(){ errorMsg.className = errorMsg.className.replace("show"); },2000);
-      }
-    
     listOfProjects = () => {
-        let errorMessage="Enter ";
-        let flag = false;
-        if(this.state.email === "" || this.state.email === undefined){
-            flag = true;
-            errorMessage += " Email";
-        }
-       
-        if(this.state.token === "" || this.state.token === undefined){
-            flag = true;
-            errorMessage += " Token";
-        }
-
-        if(this.state.url === "" || this.state.email === undefined){
-            flag = true;
-            errorMessage += " Url";
-        }
         
-        if(flag)
-            this.showErrorMsg(errorMessage);
-        
-
-        else{
             let a = window.btoa(`${this.state.email}:${this.state.token}`);
             localStorage.setItem("token",a);
           
-             FetchApi.callApi(`${this.state.url}/rest/api/3/project`)
-        .then(res=>{
+            FetchApi.callApi(`${this.state.url}/rest/api/3/project`)
+            .then(res=>{
+                console.log("resposne : ",res);
             if(res.length === 0) {
                 alert("InCorrect email");
                 
             }
-            else if(res){
+            if(res.error){
+                alert("incorrect");
+            }
+            else if(res.length !== 0){
                 localStorage.setItem("url",`${this.state.url}`);
                 const str = this.state.email;
                 const activeUser = str.split('@');
@@ -71,9 +47,10 @@ class Login extends React.Component{
             }
             
         }).catch(error=>{
+            console.log("error : ",error);
             alert("Invalid User",error);
     })
-    }
+    
 }
 
     onChangehandler = (field,event) => {
@@ -91,21 +68,20 @@ class Login extends React.Component{
                     
                 Log-in to Jira Account
                 </Header>
-                    <Form size="large">
+                    <Form size="huge" onSubmit={this.listOfProjects}>
                         <Segment stacked>
                     
                     {this.props.inputHere({ ...emailInput, onChange:(event)=> this.onChangehandler("email", event), value:this.state.email})}
                     {this.props.inputHere({...tokenInput,onChange:(event)=> this.onChangehandler("token", event), value:this.state.token})}
                     {this.props.inputHere({...urlInput,onChange:(event) => this.onChangehandler("url", event), value:this.state.url})}
 
-                    <Button color="teal" fluid size="large" onClick={this.listOfProjects}>Login</Button>
+                    <Button color="teal" fluid size="large" >Login</Button>
                     
                     </Segment>
                 </Form>
             </Grid.Column>
             </Grid>
 
-            <div id="errorField" className={this.state.errDiv}></div>
             </>
             
         )
