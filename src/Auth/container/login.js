@@ -4,7 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import FetchApi from "../../utility/apiCalls";
 import "../../Assets/loginError.css";
 import "../../Assets/download.jpeg";
-import FormElements from "../../utility/formElements"
+import FormElements from "../../HOC/formElements";
 import { withRouter } from "react-router-dom";
 import { emailInput, tokenInput, urlInput} from "../../Constants/constLogin";
 
@@ -18,7 +18,7 @@ class Login extends React.Component{
     }
 
      showErrorMsg = (msg) => {
-         let errorMsg = document.getElementById("errorField");
+        let errorMsg = document.getElementById("errorField");
         errorMsg.className = "show";
         errorMsg.innerText = msg;
         setTimeout(function(){ errorMsg.className = errorMsg.className.replace("show"); },2000);
@@ -57,21 +57,25 @@ class Login extends React.Component{
                 
             }
             else if(res){
-                console.log("new response : ",res);
                 localStorage.setItem("url",`${this.state.url}`);
+                const str = this.state.email;
+                const activeUser = str.split('@');
+                localStorage.setItem("user",activeUser[0]);
+
                 alert("Successfully Logged...");
                 this.props.history.push("/tablesheet");
             }
             
         }).catch(error=>{
             alert("Invalid User",error);
-        })
-        }
+    })
+    }
 }
 
-onChangehandler = (field,event) => {
-    this.setState({[field] : event.target.value})
-}
+    onChangehandler = (field,event) => {
+        this.setState({[field] : event.target.value})
+    }
+
     render(){
          
         return(<><br/><br />
@@ -83,7 +87,6 @@ onChangehandler = (field,event) => {
                     
                 Log-in to Jira Account
                 </Header>
-               
                     <Form size="large">
                         <Segment stacked>
                     
@@ -91,15 +94,14 @@ onChangehandler = (field,event) => {
                     {this.props.inputHere({...tokenInput,onChange:(event)=> this.onChangehandler("token", event), value:this.state.token})}
                     {this.props.inputHere({...urlInput,onChange:(event) => this.onChangehandler("url", event), value:this.state.url})}
 
-                    <Button color="teal" fluid size="large" onClick={this.listOfProjects}>
-                        Login
-                    </Button>
+                    <Button color="teal" fluid size="large" onClick={this.listOfProjects}>Login</Button>
+                    
                     </Segment>
                 </Form>
             </Grid.Column>
             </Grid>
 
-            <div id="errorField" class={this.state.errDiv}></div>
+            <div id="errorField" className={this.state.errDiv}></div>
             </>
             
         )

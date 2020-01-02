@@ -4,6 +4,7 @@ import FetchTable from '../../utility/tableContent';
 import '../../Assets/tableEdit.css';
 import Chart from '../../Charts/component/pieChart';
 import Chart2 from '../../Charts/component/barGraph';
+import { ClipLoader } from 'react-spinners';
 
 class Fetch2 extends React.Component{
 
@@ -11,7 +12,8 @@ class Fetch2 extends React.Component{
         data:[],
         actualData:[],
         length:"",
-        totalCount:[]
+        totalCount:[],
+        loading:false
     }
 
   componentDidMount =()=>{ 
@@ -19,6 +21,7 @@ class Fetch2 extends React.Component{
       const project = localStorage.getItem('project');
       const url = localStorage.getItem('url');
       const arrayOfUsers = [];
+      this.setState({loading:true})
       
       FetchApi.callApi(`${url}/rest/api/2/user/assignable/search?project=${project}`).then(res => {
         for(let i=0;i<res.length;i++){
@@ -117,8 +120,8 @@ class Fetch2 extends React.Component{
                           }
                         this.setState({totalCount:obj2});
                         localStorage.setItem('sum',JSON.stringify(obj2));
-                        //resolve(array);
                     }
+                    this.setState({loading:false})
         
               }).catch(error => {
                alert(error);
@@ -140,9 +143,9 @@ class Fetch2 extends React.Component{
     let posts ;
     if(this.state.actualData.length > 0) {
       posts =   <><br/>
-      <p class="tableHeader">Story Points by Assignee and Status</p>
-        <table class="table">
-          <thead class="headerStyle">
+      <p className="tableHeader">Story Points by Assignee and Status</p>
+        <table className="table">
+          <thead className="headerStyle">
             <tr>
               {FetchTable.tableHeader(this.state.actualData)}
             </tr>
@@ -154,10 +157,10 @@ class Fetch2 extends React.Component{
         {this.state.totalCount ? 
 
           <tfoot>
-            <tr class="specificRowBackground">
-              <td class="editRow "><b>Total:</b> </td>{FetchTable.tableFooter(this.state.totalCount)}
+            <tr className="specificRowBackground">
+              <td className="editRow "><b>Total:</b> </td>{FetchTable.tableFooter(this.state.totalCount)}
             </tr>
-          <tr class="editRow  "><td>{localStorage.getItem('total')} total issues</td></tr>
+          <tr className="editRow  "><td>{localStorage.getItem('total')} total issues</td></tr>
           </tfoot>
         :null}   
        </table><hr/>
@@ -167,11 +170,18 @@ class Fetch2 extends React.Component{
   
   return(
       <>
+       <ClipLoader
+         
+         sizeUnit={"100px"}
+         size={100}
+         color={'#123abc'}
+         loading={this.state.loading}
+         />
         {posts}
         {this.state.totalCount.todoSum  ? 
           <Chart style={{float:'right'}}
                   data={this.state.totalCount}
-          />  :"No charts found"}
+          />  :null}
 
         {this.state.totalCount.todoSum  ? 
         <Chart2

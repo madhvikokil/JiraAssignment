@@ -2,6 +2,7 @@ import React from "react";
 import FetchApi from "../../utility/apiCalls";
 import FetchTable from "../../utility/tableContent";
 import "../../Assets/tableEdit.css";
+import { ClipLoader } from 'react-spinners';
 
 class Fetch extends React.Component {
   
@@ -9,17 +10,18 @@ class Fetch extends React.Component {
         data:[],
         actualData:[],
         length:"",
-        totalCount:[]
+        totalCount:[],
+        loading:false
   }
   
   componentDidMount = () => { 
      
       const project = localStorage.getItem("project");
-      
       const url = localStorage.getItem("url");
       const arrayOfUsers = [];
-        
-        FetchApi.callApi(`${url}/rest/api/2/user/assignable/search?project=${project}`).then(res => {
+      this.setState({loading:true});
+
+      FetchApi.callApi(`${url}/rest/api/2/user/assignable/search?project=${project}`).then(res => {
           for(let i=0;i<res.length;i++){
                 arrayOfUsers.push(res[i].name);
           }
@@ -39,14 +41,13 @@ class Fetch extends React.Component {
               let originalSum = 0;
               let remainingSum = 0;
               let spentSum = 0;
-              const anotherArray = [];
+              const anotherArray = []
               let finalCount = 0;
       
               for(let i = 0; i < count ; i++){
                 
                 if(res.issues[i].fields.project.key === `${[project]}`) {
                 
-                  localStorage.setItem("activeUser",res.issues[i].fields.creator.displayName);
                   storyPoint = storyPoint +  res.issues[i].fields.customfield_10024;
                   timeEstimate = timeEstimate + res.issues[i].fields.timeestimate;
                   timeSpent = timeSpent + res.issues[i].fields.timespent;
@@ -92,7 +93,7 @@ class Fetch extends React.Component {
                 this.setState({totalCount:obj2});
                 localStorage.setItem("total",this.state.totalCount.issueCountSum);
                 localStorage.setItem("issuecount",JSON.stringify(obj2));
-              
+                this.setState({loading:false})
               
               }  
                    
@@ -101,13 +102,10 @@ class Fetch extends React.Component {
             })
           }  
        
-        
-              
         }).catch(error => {
-          //reject(error);
+            alert(error);
             })
-       
-     }
+      }
 
   anotherTable = () => {
       this.props.history.push("/tableSheet/table2");
@@ -117,9 +115,9 @@ class Fetch extends React.Component {
   
     let posts ;
     if (this.state.actualData.length > 0) {
-      posts =   <> <br/><p class="tableHeader">Release Multiple Output Statistics</p>
-        <table class="table">
-          <thead class="headerStyle">
+      posts =   <> <br/><p className="tableHeader">Release Multiple Output Statistics</p>
+        <table className="table">
+          <thead className="headerStyle">
            
             <tr >
               {FetchTable.tableHeader(this.state.actualData)}
@@ -132,11 +130,11 @@ class Fetch extends React.Component {
           
           {this.state.totalCount ? 
           <tfoot >
-            <tr class="specificRowBackground">
-              <td class="editRow"><b>Total:</b> </td> {FetchTable.tableFooter(this.state.totalCount,"table1")}
+            <tr className="specificRowBackground">
+              <td className="editRow"><b>Total:</b> </td> {FetchTable.tableFooter(this.state.totalCount,"table1")}
             </tr>
              
-         <tr class="editRow" ><td>{this.state.totalCount.issueCountSum} total issues </td></tr>
+         <tr className="editRow" ><td>{this.state.totalCount.issueCountSum} total issues </td></tr>
          
           </tfoot> : null}
         </table>
@@ -147,6 +145,13 @@ class Fetch extends React.Component {
   return(
       <>
       <br />
+        <ClipLoader
+         
+        sizeUnit={"100px"}
+        size={100}
+        color={'#123abc'}
+        loading={this.state.loading}
+        />
         {posts}
       </>
     )
