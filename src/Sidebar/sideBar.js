@@ -10,7 +10,7 @@ class SidebarVisible extends React.Component {
 
   render(){
     return(
-      <Sidebar.Pushable as={Segment} style={{ height:"880px"}}>
+      <Sidebar.Pushable as={Segment} style={{ height:"890px"}}>
         <Sidebar
           as={Menu}
           animation="overlay"
