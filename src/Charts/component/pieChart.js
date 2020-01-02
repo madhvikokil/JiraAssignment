@@ -21,7 +21,7 @@ export default class Chart extends PureComponent {
 
 	componentDidMount(){
 		
-			let obj =["open","accepted","inprogress","review","resolved","done"];
+			let obj =["Open","Accepted","Inprogress","Review","Resolved","Done"];
 			let s = Object.values(this.props.data);
 			delete s[6];
 			const dummy = s.map((key,index) => { return { value :s[index],name:obj[index]}});
@@ -34,7 +34,7 @@ export default class Chart extends PureComponent {
 			const RADIAN = Math.PI / 180;
 			const {
 			  cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
-			  fill, payload, value,
+			  fill, value,name
 			} = props;
 			const sin = Math.sin(-RADIAN * midAngle);
 			const cos = Math.cos(-RADIAN * midAngle);
@@ -48,7 +48,7 @@ export default class Chart extends PureComponent {
 		  
 			return (
 			  <g>
-				<text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>{payload.name}</text>
+				{/* <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>{payload.name}</text> */}
 				<Sector
 				  cx={cx}
 				  cy={cy}
@@ -69,7 +69,7 @@ export default class Chart extends PureComponent {
 				/>
 				<path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
 				<circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-				<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{` ${value}`}</text>
+				<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{` ${value} ${name}`}</text>
 				<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
 				  
 				</text>

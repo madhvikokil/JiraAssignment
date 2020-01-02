@@ -60,7 +60,7 @@ class Login extends React.Component{
     render(){
          
         return(<><br/><br />
-            <h1 style={{color:"teal"}}>JIRA STATUS APPLICATION</h1>
+            <h1 style={{color:"black"}}>JIRA DASHBOARD APPLICATION</h1>
             <Grid textAlign="center" style={{ height: "75vh" }} verticalAlign="middle">
             <Grid.Column style={{ maxWidth: 450 }}>
                 

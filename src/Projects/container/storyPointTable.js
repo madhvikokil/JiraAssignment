@@ -90,7 +90,7 @@ class Fetch2 extends React.Component{
         
                        const obj ={
                            
-                            assignee:res.issues[0].fields.assignee.name,
+                            assignee:res.issues[0].fields.assignee.displayName,
                             open:todoStoryPoint,
                             accepted:acceptedStoryPoint,
                             in_Progress:inProgressStoryPointCount,
@@ -145,7 +145,7 @@ class Fetch2 extends React.Component{
    
     let posts ;
     if(this.state.actualData.length > 0) {
-      posts =   <><h3>JIRA STATUS APPLICATION</h3>
+      posts =   <><h3>JIRA DASHBOARD APPLICATION</h3>
       <p className="tableHeader">Story Points by Assignee and Status</p>
         <table className="table">
           <thead className="headerStyle">
@@ -163,7 +163,7 @@ class Fetch2 extends React.Component{
             <tr className="specificRowBackground">
               <td className="editRow "><b>Total:</b> </td>{FetchTable.tableFooter(this.state.totalCount)}
             </tr>
-          <tr className="editRow  "><td>{localStorage.getItem('total')} total issues</td></tr>
+          <tr className="editRow "><td>{localStorage.getItem('total')} total issues</td></tr>
           </tfoot>
         :null}   
        </table><hr/>

@@ -55,7 +55,7 @@ class Projects extends React.Component{
             color={'#123abc'}
             loading={this.state.loading}
             />
-            <h1 style={{color:"teal"}}>JIRA STATUS APPLICATION</h1>
+            <h1 style={{color:"black"}}>JIRA DASHBOARD APPLICATION</h1>
             <div className="project-list">
             <h2 style={{float:"left",marginLeft:"20px",marginTop:"50px"}}>List of Projects</h2>
             <br /><br/><br/><br/><br/><br/>

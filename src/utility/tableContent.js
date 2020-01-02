@@ -35,7 +35,7 @@ export default {
             }
             else{
                 const ReplacedKey = key.replace(/_/g, ' ');
-                return <th key={key}>{ReplacedKey.toUpperCase()}</th>
+                return <th className = "alignField" key={key}>{ReplacedKey.toUpperCase()}</th>
             }
         
         })

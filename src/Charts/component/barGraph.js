@@ -18,7 +18,7 @@ class BarGraph extends React.Component{
 		const { arrays } = this.state;
 		console.log("this.state.arrays : ",arrays);
 	   	this.setState({loading : true})
-		let obj =["open","accepted","inprog","review","resolved","done"];
+		let obj =["Open","Accept","Inprog","Review","Resolve","Done"];
 			let s = Object.values(this.props.data);
 			delete s[6];
 			const dummy = s.map((key,index) => { return { value :s[index],name:obj[index]}});

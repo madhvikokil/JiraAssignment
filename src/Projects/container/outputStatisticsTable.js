@@ -56,7 +56,7 @@ class Fetch extends React.Component {
                   timeEstimate = timeEstimate + res.issues[i].fields.timeestimate;
                   timeSpent = timeSpent + res.issues[i].fields.timespent;
                   timeOriginalEstimate = timeOriginalEstimate + res.issues[i].fields.timeoriginalestimate;
-                  anotherArray.push(res.issues[i].fields.assignee.name);
+                  anotherArray.push(res.issues[i].fields.assignee.displayName);
                  }
       
                  finalCount = anotherArray.length;
@@ -67,7 +67,7 @@ class Fetch extends React.Component {
               const value3 = Math.floor(timeEstimate/3600);
       
               const obj ={
-                  user : res.issues[0].fields.assignee.name,
+                  user : res.issues[0].fields.assignee.displayName,
                   issue_count : finalCount,
                   story_Points : storyPoint,
                   Original_Estimate_in_hours : value2,
@@ -98,6 +98,7 @@ class Fetch extends React.Component {
                 localStorage.setItem("total",this.state.totalCount.issueCountSum);
                 localStorage.setItem("issuecount",JSON.stringify(obj2));
                 this.setState({loading:false})
+               
               
               }  
                    
@@ -120,7 +121,7 @@ class Fetch extends React.Component {
     let posts ;
     if (this.state.actualData.length > 0) {
       posts =   <> 
-      <h3>JIRA STATUS APPLICATION </h3>
+      <h3>JIRA DASHBOARD APPLICATION </h3>
       <p className="tableHeader">Release Multiple Output Statistics</p>
         <table className="table">
           <thead className="headerStyle">
