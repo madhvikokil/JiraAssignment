@@ -1,0 +1,84 @@
+.editRow {
+    color:#0052CC;
+ 
+}
+hr{
+
+    
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1)
+}
+.table{
+    margin-bottom: 0;
+    width: 100%;
+    border-collapse: collapse;
+    color: #212529;
+    border-spacing: 0;
+    width: 91%;;
+    margin-left:125px;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.underLine-name:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.editRows {
+    
+    color: 0052CC;
+    padding: 8px;
+    margin: 0px;
+    font-size: 15px;
+    padding: 10px 64px 10px 10px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    height:40px;
+}
+tr{
+    height:40px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.specificRowBackground{
+    background-color: rgb(244,245,247);
+    border-bottom: 1px solid lightgrey;
+}
+
+.headerStyle{
+    color:#7a869a;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.tableHeader{
+    background-color: #0747a6;
+    color:white;
+    text-align: left;
+    padding:8px;
+    margin-left:140px;
+    font-size:15px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    padding: 9px 87px 10px 53px;
+}
+
+.headerBox{
+   
+    border-radius: 3px;
+    color: #42526E;
+    display: inline-block;
+    font-weight: 900;
+    line-height: 10%;
+    margin: 0;
+    padding: 10px 5px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: #dfe1e5;
+}
+
+tr:hover {background-color:#f5f5f5;}

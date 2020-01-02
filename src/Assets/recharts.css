@@ -1,0 +1,19 @@
+.recharts-wrapper{
+    display: inline;
+}
+
+.piechart-styling{
+    float:left;
+    margin-left: 225px;
+    
+}
+
+.bargraph-styling{
+    float:right;
+    margin-left: 40px
+}
+
+.editValue{
+    float:right;
+    color:"red";
+}
